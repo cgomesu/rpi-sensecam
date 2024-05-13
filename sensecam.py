@@ -16,7 +16,7 @@ def main():
     #hat
     sense=SenseHat()
     sense.clear()
-    sense.low_light=True
+    sense.low_light=False
     #cam
     cam=Picamera2()
     # about the BGR888 format: 24 bits/pixel, each pixel is [R,G,B] (yes, it's very confusing)
@@ -30,7 +30,7 @@ def main():
             sense.set_pixels(pixels)
     except:
         sense.clear()
-        sense.low_light=False
+        sense.low_light=True
 
 if __name__=='__main__':
     main()
