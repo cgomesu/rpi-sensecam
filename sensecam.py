@@ -13,15 +13,24 @@ def img_to_pixels(rgb_img,dim=(8,8)):
     return pixels
 
 def main():
+    #hat
     sense=SenseHat()
+    sense.clear()
+    sense.low_light=True
+    #cam
     cam=Picamera2()
-    config=cam.create_preview_configuration({'format':'RGB888','size':(640,480)})
+    # about the BGR888 format: 24 bits/pixel, each pixel is [R,G,B] (yes, it's very confusing)
+    config=cam.create_preview_configuration({'format':'BGR888','size':(64,64)})
     cam.configure(config)
     cam.start()
-    while True:
-        rgb=cam.capture_array()
-        pixels=img_to_pixels(rgb)
-        sense.set_pixels(pixels)
+    try:
+        while True:
+            rgb=cam.capture_array()
+            pixels=img_to_pixels(rgb)
+            sense.set_pixels(pixels)
+    except:
+        sense.clear()
+        sense.low_light=False
 
 if __name__=='__main__':
     main()
