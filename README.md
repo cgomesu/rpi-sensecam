@@ -1,8 +1,8 @@
 # rpi-sensecam
 
-Display the RPi camera on the 8x8 LED matrix of the sense-hat.
+Display the RPi camera on the 8x8 LED matrix of the sense-hat. This is a redo of @bennuttall's [astro_cam.py](https://github.com/bennuttall/sense-hat-examples/blob/master/python/astro_cam.py) that uses `picamera2` isntead of the deprecated `picamera` package. You'll need a SenseHat as well as a camera module to use this script, of course.
 
-## installation
+## Installation and usage
 
 1. Install dependencies:
 
@@ -12,7 +12,7 @@ Display the RPi camera on the 8x8 LED matrix of the sense-hat.
     sudo apt install python3-picamera2 --no-install-recommends
     ```
 
-1. Enable the I2C interace:
+1. Enable the I2C interface:
 
     ```sh
     sudo raspi-config
