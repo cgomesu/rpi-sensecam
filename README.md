@@ -29,5 +29,4 @@ Display the RPi camera on the 8x8 LED matrix of the sense-hat.
     ./sensecam.py
     ```
 
-    > [!NOTE]
-    > If you have issues with Sense Hat, try appending `dtoverlay=rpi-sense` to the `/boot/firmware/config.txt` file of your RPi.
+    > **Note.** If your Sense Hat is stuck on the rainbow LED demo that is loaded by default, try appending `dtoverlay=rpi-sense` to the `/boot/firmware/config.txt` file of your RPi.
