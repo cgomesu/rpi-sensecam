@@ -4,6 +4,8 @@ from picamera2 import Picamera2
 from sense_hat import SenseHat, InputEvent
 from cv2 import resize,split,INTER_AREA
 from signal import pause
+from time import sleep
+from random import randint
 
 def img_to_pixels(rgb_img,dim=(8,8)):
     pixels=list()
@@ -14,10 +16,35 @@ def img_to_pixels(rgb_img,dim=(8,8)):
     return pixels
 
 def pushed_up(event):
-    pass
+    """
+    Display sensor data
+    """
+    temperature=int(round(sense.get_temperature(),0))
+    humididity=int(round(sense.get_humidity(),0))
+    pressure=int(round(sense.get_pressure(),0))
+    north=int(round(sense.get_compass(),0))
+    sense.show_message(
+        text_string=f"t: {temperature}o   h: {humididity}%   p: {pressure}m   N: {north}o",
+        scroll_speed=.075
+    )
 
 def pushed_down(event):
-    pass
+    """
+    Random pixels
+    """
+    while event.direction == 'down':
+        sense.set_pixel(randint(0, 7),
+                    randint(0, 7),
+                    randint(0, 255),
+                    randint(0, 255),
+                    randint(0, 255))
+        # refresh event
+        events=sense.stick.get_events()
+        if events:
+            # process the latest
+            event=events[-1]
+        sleep(.05)
+
 
 def pushed_left(event):
     pass
@@ -26,6 +53,9 @@ def pushed_right(event):
     pass
 
 def pushed_middle(event:InputEvent):
+    """
+    Sensecam implementation
+    """
     while event.direction == 'middle':
         rgb=cam.capture_array()
         pixels=img_to_pixels(rgb)
