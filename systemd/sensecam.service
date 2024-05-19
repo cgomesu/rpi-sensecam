@@ -1,0 +1,21 @@
+[Unit]
+Description=SenseHAT and RPI-Cam integration
+Documentation=https://github.com/cgomesu/rpi-sensecam
+
+[Service]
+Type=simple
+# User must match folder permission and user with the required Python packages
+# edit User and WorkinDirectory path if username different than 'pi'
+User=pi
+#Group=GROUP
+WorkingDirectory = /home/pi/rpi-sensecam/
+ExecStart=/usr/bin/python3 sensecam.py
+# Restart options
+Restart=always
+RestartSec=15
+# Tell how systemd should kill this process
+KillMode=process
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
