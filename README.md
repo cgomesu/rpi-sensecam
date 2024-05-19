@@ -30,3 +30,5 @@ Display the RPi camera on the 8x8 LED matrix of the sense-hat. This is a redo of
     ```
 
     > **Note.** If your Sense Hat is stuck on the rainbow LED demo that is loaded by default, try appending `dtoverlay=rpi-sense` to the `/boot/firmware/config.txt` file of your RPi.
+
+1. Use the joystick buttons on the sensehat to control which mode to run. The **sensecam** integration is activated via the `middle` button (press the joystick once). Explore other modes by moving the joystick up, down, etc. `left` turns it off (eco mode?).
