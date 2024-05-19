@@ -15,7 +15,7 @@ def img_to_pixels(rgb_img,dim=(8,8)):
             pixels.append([cr,cg,cb])
     return pixels
 
-def pushed_up(event):
+def pushed_up():
     """
     Display sensor data
     """
@@ -28,7 +28,7 @@ def pushed_up(event):
         scroll_speed=.075
     )
 
-def pushed_down(event):
+def pushed_down(event:InputEvent):
     """
     Random pixels
     """
@@ -45,12 +45,34 @@ def pushed_down(event):
             event=events[-1]
         sleep(.05)
 
-
-def pushed_left(event):
+def pushed_left():
+    """
+    Nothing
+    """
     pass
 
-def pushed_right(event):
-    pass
+def pushed_right(event:InputEvent):
+    """
+    Colour cycle
+    - from: https://raw.githubusercontent.com/astro-pi/python-sense-hat/master/docs/examples/colour_cycle.py
+    """
+    r = 255
+    g = 0
+    b = 0
+    while event.direction == 'right':
+        sense.clear([r, g, b])
+        if (r == 255 and g < 255 and b == 0): g += 1
+        if (g == 255 and r > 0 and b == 0): r -= 1
+        if (g == 255 and b < 255 and r == 0): b += 1
+        if (b == 255 and g > 0 and r == 0): g -= 1
+        if (b == 255 and r < 255 and g == 0): r += 1
+        if (r == 255 and b > 0 and g == 0): b -= 1
+        # refresh event
+        events=sense.stick.get_events()
+        if events:
+            # process the latest
+            event=events[-1]
+        sleep(.0001)
 
 def pushed_middle(event:InputEvent):
     """
